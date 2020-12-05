@@ -23,7 +23,16 @@ export class AuthService {
   }
 
   login(usuario: UsuarioModel) {
+    //Antes debemos tener un usuario creado en firebase
+    const authData = {
+      ...usuario,
+      returnSecureToken: true
+    };
 
+    return this.http.post(
+      `${this.url}signInWithPassword?key=${this.apiKey}`,
+      authData
+    );
   }
 
   nuevoUsuario(usuario: UsuarioModel) {
