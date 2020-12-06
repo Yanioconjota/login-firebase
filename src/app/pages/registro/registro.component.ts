@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+
 import { UsuarioModel } from 'src/app/models/usuario.model';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -14,7 +16,8 @@ export class RegistroComponent implements OnInit {
   usuario: UsuarioModel;
 
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService,
+              private router: Router) { }
 
   ngOnInit() {
     this.usuario = new UsuarioModel();
@@ -43,6 +46,7 @@ export class RegistroComponent implements OnInit {
       .subscribe( resp => {
         console.log('respuesta registro:', resp);
         Swal.close();
+        this.router.navigateByUrl('/home');
       }, err => {
         console.log(err.error.error.message);
         Swal.fire({
