@@ -14,6 +14,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class RegistroComponent implements OnInit {
 
   usuario: UsuarioModel;
+  recuerdame = false;
 
 
   constructor(private auth: AuthService,
@@ -46,6 +47,9 @@ export class RegistroComponent implements OnInit {
       .subscribe( resp => {
         console.log('respuesta registro:', resp);
         Swal.close();
+        if (this.recuerdame) {
+          localStorage.setItem('email', this.usuario.email);
+        }
         this.router.navigateByUrl('/home');
       }, err => {
         console.log(err.error.error.message);
