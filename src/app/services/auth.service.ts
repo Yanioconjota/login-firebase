@@ -23,7 +23,7 @@ export class AuthService {
   }
 
   logOut() {
-
+    localStorage.removeItem('token');
   }
 
   login(usuario: UsuarioModel) {
